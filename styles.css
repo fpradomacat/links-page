@@ -1,0 +1,172 @@
+/* Página de enlaces · links.pradomacat.com
+   Todo valor visual sale de tokens.css (cara clara). No escribir colores, tamaños,
+   radios ni sombras a mano. */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  overflow-x: hidden;
+}
+
+a { color: var(--color-accent); text-underline-offset: var(--space-1); }
+a:hover { color: var(--color-accent-hover); }
+:focus-visible { outline: var(--space-1) solid var(--color-focus); outline-offset: var(--space-1); border-radius: var(--radius-xs); }
+
+/* ---------- Aura decorativa (como el inicio de la landing) ---------- */
+.aura-wrap { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.aura {
+  position: absolute;
+  border-radius: var(--radius-round);
+  filter: blur(var(--space-16));
+  opacity: 0.7;
+}
+.aura-1 { width: calc(var(--space-26) * 4); height: calc(var(--space-26) * 4); background: var(--color-sky); top: calc(var(--space-26) * -1.4); left: calc(var(--space-26) * -1.6); }
+.aura-2 { width: calc(var(--space-26) * 3.6); height: calc(var(--space-26) * 3.6); background: var(--color-peach); bottom: calc(var(--space-26) * -1.5); right: calc(var(--space-26) * -1.4); }
+.aura-3 { width: calc(var(--space-26) * 2.4); height: calc(var(--space-26) * 2.4); background: var(--color-bg-tint); top: 40%; right: -10%; opacity: 0.9; }
+
+/* ---------- Layout ---------- */
+.page {
+  flex: 1;
+  width: 100%;
+  max-width: calc(var(--measure-head) - var(--space-26) * 2);
+  margin: 0 auto;
+  padding: var(--space-10) var(--gutter) var(--space-8);
+}
+
+/* ---------- Perfil ---------- */
+.profile { text-align: center; }
+.avatar {
+  display: block;
+  width: calc(var(--space-16) * 2);
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  margin: 0 auto var(--space-5);
+  border-radius: var(--radius-arch) var(--radius-arch) var(--radius-xl) var(--radius-xl);
+  background: var(--color-bg-alt);
+}
+.name {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-display-sm);
+  line-height: var(--lh-display);
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+/* Detalle terracota pequeño bajo el nombre */
+.name::after {
+  content: "";
+  display: block;
+  width: var(--space-8);
+  height: var(--space-1);
+  margin: var(--space-4) auto 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-warm);
+  opacity: 0.6;
+}
+.tagline {
+  margin: var(--space-4) 0 var(--space-1);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--fs-xl);
+  line-height: var(--lh-quote);
+  text-wrap: balance;
+}
+.subtitle { margin: 0; font-size: var(--fs-sm); color: var(--color-text-muted); }
+
+/* ---------- Enlaces ---------- */
+.links { margin-top: var(--space-8); }
+.links ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-4); }
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: var(--btn-height);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--btn-radius);
+  border: var(--btn-border-width) solid var(--btn-primary-border);
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  font-family: var(--font-sans);
+  font-size: var(--btn-font-size);
+  font-weight: var(--btn-font-weight);
+  line-height: var(--lh-heading);
+  text-align: center;
+  text-decoration: none;
+  transition: background-color var(--duration-fast) var(--ease-out),
+              border-color var(--duration-fast) var(--ease-out),
+              color var(--duration-fast) var(--ease-out);
+}
+.btn:hover {
+  background: var(--btn-primary-bg-hover);
+  border-color: var(--btn-primary-border-hover);
+  color: var(--btn-primary-text);
+}
+.btn:focus-visible { border-radius: var(--btn-radius); }
+
+/* Secundario: fondo translúcido para mantener el contraste sobre el aura */
+.btn-ghost {
+  background: var(--color-surface-translucent);
+  border-color: var(--btn-secondary-border);
+  color: var(--btn-secondary-text);
+}
+.btn-ghost:hover {
+  background: var(--color-surface);
+  border-color: var(--btn-secondary-border);
+  color: var(--btn-secondary-text-hover);
+}
+
+/* ---------- Pie ---------- */
+.footer {
+  padding: var(--space-6) var(--gutter) var(--space-10);
+  text-align: center;
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+}
+.footer p { margin: 0; }
+.footer a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--space-12);
+  padding: 0 var(--space-2);
+}
+
+/* ---------- Movimiento ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .aura { animation: breathe 12s ease-in-out infinite; }
+  .aura-2 { animation-delay: -4s; }
+  .aura-3 { animation-delay: -8s; }
+
+  .reveal { animation: reveal var(--duration-reveal) var(--ease-out) both; }
+  .reveal-delay { animation-delay: calc(var(--duration-reveal) * 0.2); }
+}
+
+/* Inhala, sostiene, exhala */
+@keyframes breathe {
+  0%, 100% { transform: scale(0.85); }
+  40%, 55% { transform: scale(1.08); }
+}
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(var(--space-3)); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ---------- Escritorio ---------- */
+@media (min-width: 720px) {
+  .page { padding-top: var(--space-18); }
+}
